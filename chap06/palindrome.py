@@ -1,6 +1,6 @@
 """Module that provides is_palindrome.
 
-Author of is_palindrome: you
+Author of is_palindrome: Anne Wilkinson
 """
 
 def first(word):
@@ -32,9 +32,13 @@ def middle(word):
     """
     return word[1:-1]
 
-
 def is_palindrome(word):
-    """Write a good Docstring here."""
+    """Returns True if the word is a palindrome"""
+    if len(word) <= 1:
+        return True
+    if first(word) != last(word):
+        return False
+    return is_palindrome(middle(word))
+    
 
-    # TODO: fill in the body of this function
-    return True
+print is_palindrome('redivider')
