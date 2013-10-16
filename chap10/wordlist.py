@@ -16,6 +16,10 @@ def make_word_list1():
     returns: list of strings
     """
     t = []
+    fin = open ('words.txt')
+    for line in fin:
+        word = line.strip()
+        t.append(word)
     return t
 
 
@@ -25,8 +29,11 @@ def make_word_list2():
     returns: list of strings
     """
     t = []
+    fin = open ('words.txt')
+    for line in fin:
+        word = line.strip()
+        t = t + [word]
     return t
-
 
 start_time = time.time()
 t = make_word_list1()
