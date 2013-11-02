@@ -69,7 +69,9 @@ def most_common(hist):
     returns: list of (word, frequency) pairs, sorted by frequency
     """
     t = []
-    # TODO: fix this
+    for word in hist:
+        t.append((hist[word],word))
+    t.sort(reverse = True)
     return t
 
 
@@ -93,7 +95,9 @@ def subtract(d1, d2):
     returns: new dictionary
     """
     res = {}
-    # TODO: fill this is
+    for word in d1:
+        if word not in d2:
+            res[word] = None
     return res
 
 
@@ -101,10 +105,20 @@ def total_words(hist):
     """Returns the total of the frequencies in a histogram."""
     return sum(hist.values())
 
+def cumu_sum(hist):
+    res = []
+    m=0
+    for key in hist:
+        m += hist[key]
+        res.append(m)
+    return res
 
 def different_words(hist):
     """Returns the number of different words in a histogram."""
     return len(hist)
+
+import random
+from bisect import *
 
 
 def random_word(hist):
@@ -112,9 +126,12 @@ def random_word(hist):
 
     The probability of each word is proportional to its frequency.
     """
-    # TODO: fix this
-    return 'random word'
-
+    allthewords = hist.keys()
+    totalfreq = total_words(hist)
+    cumulativefreq = cumu_sum(hist)
+    num = random.randint(1,totalfreq)
+    i = bisect_left(cumulativefreq,num)
+    return allthewords[i]
 
 if __name__ == '__main__':
     hist = process_file('emma.txt', skip_header=True)
